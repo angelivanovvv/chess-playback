@@ -8,6 +8,10 @@ The chess-playback folder is where your code exist. In there, currently there is
 
 In the project directory, you can run:
 
+### `npm insall`
+
+Install all dependencies requred for the application.
+
 ### `npm start`
 
 Runs the app in the development mode.\

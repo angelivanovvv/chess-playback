@@ -1,10 +1,15 @@
 # Getting Started with the server part of this application
 
-This demo server is contain all the data required for the chess-playback
+This demo server contains all the data required for the chess-playback
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm start`
+
+Install all dependencies requred for the server.
+
 
 ### `npm start`
 
