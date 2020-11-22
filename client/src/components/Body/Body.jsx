@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router';
 
 import Wrapper from './../../common/Wrapper/Wrapper';
 import ChessPG from '../ChessPG/ChessPG';

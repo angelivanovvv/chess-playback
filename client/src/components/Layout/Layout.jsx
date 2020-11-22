@@ -27,8 +27,8 @@ const Layout = ({ classes }) => {
 
 	return (
 		<Wrapper className={`layout ${classes.root}`}>
-			<Grid container spacing={1}>
-				<Grid item xm={12} md={4}>
+			<Grid container>
+				<Grid item xs={12} md={4}>
 					<Sidebar />
 				</Grid>
 				<Grid item xs={12} md={8}>

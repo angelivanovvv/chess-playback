@@ -14,3 +14,5 @@ export const transformError = (error) => {
 };
 
 export const getRouteParam = (route, position) => route?.split('/')[position];
+
+export const append_ID = (data) => data.map((item, index) => (item.id = index));

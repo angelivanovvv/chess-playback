@@ -1,0 +1,9 @@
+.spinner {
+    &.spinner-centered {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25px;
+    } 
+}
