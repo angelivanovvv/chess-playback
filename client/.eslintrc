@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+  },
+  "settings": {
+		"react": {
+			"version": "detect"
+		}
+  },
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
+  "plugins": [],
+  // add your custom rules here
+  "rules": {
+    "react/prop-types": 1,
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "no-plusplus": "off",
+    "func-names": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "react/self-closing-comp": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "import/no-named-as-default": "off",
+    "camelcase": "off",
+    "react/no-unused-prop-types": "warn",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/display-name": "off",
+    "react/jsx-wrap-multilines": "off"
+  }
+}
