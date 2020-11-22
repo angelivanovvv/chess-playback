@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -8,6 +8,8 @@ import Wrapper from './../../common/Wrapper/Wrapper';
 import Sidebar from './../Sidebar/Sidebar';
 import Body from './../Body/Body';
 
+import useGames from './../../hooks/games';
+
 import './layout.scss';
 
 const styles = {
@@ -16,18 +18,26 @@ const styles = {
 	},
 };
 
-const Layout = ({ classes }) => (
-	<Wrapper className={`layout ${classes.root}`}>
-		<Grid container spacing={1}>
-			<Grid item xm={12} md={4}>
-				<Sidebar />
+const Layout = ({ classes }) => {
+	const { onFetchGames } = useGames();
+
+	useEffect(() => {
+		onFetchGames();
+	}, [onFetchGames]);
+
+	return (
+		<Wrapper className={`layout ${classes.root}`}>
+			<Grid container spacing={1}>
+				<Grid item xm={12} md={4}>
+					<Sidebar />
+				</Grid>
+				<Grid item xs={12} md={8}>
+					<Body />
+				</Grid>
 			</Grid>
-			<Grid item xs={12} md={8}>
-				<Body />
-			</Grid>
-		</Grid>
-	</Wrapper>
-);
+		</Wrapper>
+	);
+};
 
 Layout.propTypes = {
 	classes: PropTypes.shape({

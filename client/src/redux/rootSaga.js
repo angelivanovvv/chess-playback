@@ -1,12 +1,11 @@
-// import { takeEvery } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 
-// ADD ACTON TYPES FOR INIT SAGAS HER
+import * as actionTypes from './../constants/actionTypes';
 
-// ADD ALL SAGAS HERE
+import gamesSaga from './sagas/gamesSaga';
 
 function* rootSaga() {
-	// YIELD ALL SAGAS HERE
-	// yield takeEvery(actionTypes.INIT_SIGNIN, signInSaga);
+	yield takeEvery(actionTypes.INIT_GAMES, gamesSaga);
 }
 
 export default rootSaga;

@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 
 export const transformResponse = (response) =>
-	response ? fromJS(response?.body) : response?.body;
+	response ? fromJS(response?.data) : response?.data;
 
 export const transformError = (error) => {
 	return error

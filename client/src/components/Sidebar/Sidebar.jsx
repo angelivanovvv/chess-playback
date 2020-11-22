@@ -5,7 +5,7 @@ import Wrapper from './../../common/Wrapper/Wrapper';
 import './sidebar.scss';
 
 const Sidebar = () => {
-	return <Wrapper>Sidebar</Wrapper>;
+	return <Wrapper className="sidebar">Sidebar</Wrapper>;
 };
 
 Sidebar.propTypes = {};

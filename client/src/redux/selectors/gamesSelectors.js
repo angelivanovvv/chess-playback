@@ -1,1 +1,1 @@
-// ADD ALL SELECTORS FOR GAMES
+export const getGames = (state) => state.get('games');
