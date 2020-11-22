@@ -9,6 +9,8 @@ import { createBrowserHistory } from 'history';
 import initStore from './redux/store';
 import rootSaga from './redux/rootSaga';
 
+import Layout from './components/Layout/Layout';
+
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 const store = initStore(history, sagaMiddleware);
@@ -21,7 +23,7 @@ function App() {
 	return (
 		<Provider store={store}>
 			<ConnectedRouter history={history}>
-				<div className="App">App loaded</div>;
+				<Layout />
 			</ConnectedRouter>
 		</Provider>
 	);
