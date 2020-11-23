@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,20 +15,13 @@ import Spinner from './../../common/Spinner/Spinner';
 
 import useGames from './../../hooks/games';
 
-import { ROUTES } from './../../constants/clientRoutes';
+import { ROUTES, ROUTES_ACTIONS } from './../../constants/clientRoutes';
 
 import './sidebar.scss';
 
-const styles = {
-	root: {
-		width: '100%',
-		maxWidth: 360,
-		backgroundColor: 'green',
-	},
-};
-
 const Sidebar = () => {
-	const { isLoading, error, response } = useGames();
+	const dispatch = useDispatch();
+	const { isLoading, response } = useGames();
 
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -36,16 +30,14 @@ const Sidebar = () => {
 	}, []);
 
 	useEffect(() => {
-		// if (response) console.log('response ----> ', response.toJS());
-		// ADD REDIRECT TO GO TO HOME AFTER REFRESH
 		return () => {
-			<Redirect to={ROUTES.HOME()} />;
+			dispatch(ROUTES_ACTIONS.toHome());
 		};
-	}, [isLoading, error, response]);
+	}, [isLoading, response]);
 
 	return (
 		<Wrapper className="sidebar">
-			<List component="nav" aria-label="secondary mailbox folder">
+			<List disablePadding={true} component="nav" aria-label="primary">
 				{isLoading ? (
 					<Spinner centered />
 				) : (
@@ -79,7 +71,15 @@ const Sidebar = () => {
 	);
 };
 
-Sidebar.propTypes = {};
-Sidebar.defaultProps = {};
+Sidebar.propTypes = {
+	classes: PropTypes.shape({
+		root: PropTypes.string,
+	}),
+};
+Sidebar.defaultProps = {
+	classes: {
+		root: '',
+	},
+};
 
-export default withStyles(styles)(Sidebar);
+export default Sidebar;

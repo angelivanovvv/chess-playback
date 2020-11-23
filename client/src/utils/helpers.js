@@ -13,6 +13,6 @@ export const transformError = (error) => {
 		: error?.response;
 };
 
-export const getRouteParam = (route, position) => route?.split('/')[position];
+export const getRouteParam = (route) => route?.split('/')[2];
 
 export const append_ID = (data) => data.map((item, index) => (item.id = index));

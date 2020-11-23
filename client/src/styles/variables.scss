@@ -1,0 +1,40 @@
+/*---------------- COLORS -------------------*/
+$white: #fff;
+$black: #1b1b1b;
+$yellow: #fcd307;
+$red: #fd5b48;
+$green: #05b99f;
+
+/*---------------- PRIMARY COLORS ----------------*/
+$primaryWhite: $white;
+$primaryBlack: $black;
+$primaryYellow: $yellow;
+
+/*----------------SECONDARY COLORS ----------------*/
+$secondryWhite: #fffdf3;
+$secondaryGrey: #505050;
+$secondaryBlue: #2200c8;
+
+/*------------ THIRD COLORS -----------------*/
+$thirdWhite: #fbfbfb;
+
+/*----------------ACCENT COLORS ----------------*/
+$accentOrange: #f19846;
+$accentGreen: #05b99f;
+$accentRed: #fd5b48;
+$accentPurple: #8876e2;
+$accentWhite: #f0eacb;
+
+/*---------------- VARIABLES -------------------*/
+$bodyBG: $white;
+$bodyColor: $black;
+$errorMessage: $red;
+$successMessage: $green;
+
+/*-------------RESPONSIVE BREAK POINTS  -----------*/
+$breakpoints: (
+	smPhone: 576px,
+	phone: 767px,
+	tablet: 991px,
+	desktop: 1199px,
+);
