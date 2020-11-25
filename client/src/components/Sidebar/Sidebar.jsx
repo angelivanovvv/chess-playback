@@ -23,7 +23,7 @@ const Sidebar = () => {
 	const dispatch = useDispatch();
 	const { isLoading, response } = useGames();
 
-	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [selectedIndex, setSelectedIndex] = useState(1000);
 
 	const onSelected = useCallback((index) => {
 		setSelectedIndex(index);

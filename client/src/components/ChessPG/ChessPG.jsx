@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
-import moment from 'moment';
-
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 
 import Wrapper from './../../common/Wrapper/Wrapper';
-import Spinner from './../../common/Spinner/Spinner';
+import Details from './../../common/Details/Details';
+import Chess from './../../common/Chess/Chess';
 
 import useGames from './../../hooks/games';
 
@@ -17,104 +12,56 @@ import { getRouteParam } from './../../utils/helpers';
 
 import './chessPG.scss';
 
-const styles = {
-	root: {
-		maxWidth: 600,
-		margin: '0 auto',
-		marginTop: '25px',
-		textAlign: 'center',
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: 'bold',
-		color: 'black',
-		paddingBottom: '5px',
-	},
-	subtitle: {
-		fontSize: 20,
-		fontWeight: 'bold',
-		color: 'black',
-		paddingBottom: '5px',
-	},
-	content: {
-		fontSize: 12,
-	},
-};
-
-const ChessPlayground = ({ history, classes }) => {
+const ChessPlayground = ({ history }) => {
 	const {
-		location: { pathname },
+		location: { pathname: id },
 	} = history;
 
 	const { isLoading, response } = useGames();
 	const [game_ID, setGame_ID] = useState(0);
-	const [currentGame, setCurrentGame] = useState(Map());
+	const [gameLoaded, setGameLoaded] = useState(false);
+	const [gameReseted, setGameReseted] = useState(false);
+	const [selectedGame, setSelectedGame] = useState(Map());
+
+	const onDefaultReset = useCallback(() => {
+		setGameReseted(false);
+	}, [setGameReseted]);
 
 	useEffect(() => {
-		if (pathname !== '/') setGame_ID(parseInt(getRouteParam(pathname)));
-	}, [pathname]);
-
-	useEffect(() => {
+		if (id === '/') {
+			setGameLoaded(false);
+		} else {
+			setGame_ID(parseInt(getRouteParam(id)));
+			setGameLoaded(true);
+		}
 		response?.forEach((game, index) =>
-			game_ID === index ? setCurrentGame(game) : null
+			game_ID === index ? setSelectedGame(game) : null
 		);
-	}, [response, game_ID]);
+	}, [id, response, game_ID]);
+
+	useEffect(() => {
+		if (id !== game_ID && !isNaN(parseInt(getRouteParam(id)))) {
+			setGameReseted(true);
+		}
+	}, [id]);
 
 	return (
 		<Wrapper className="chess-playground">
-			<Card className={classes.root}>
-				{isLoading ? (
-					<Spinner centered />
-				) : (
-					<CardContent>
-						<Typography
-							variant="h4"
-							component="h4"
-							className={classes.title}
-							gutterBottom
-						>
-							{`${currentGame.get('id') + 1}. ${currentGame.get(
-								'white'
-							)} vs ${currentGame.get('black')}`}
-						</Typography>
-						<Typography
-							variant="h3"
-							component="h3"
-							className={classes.subtitle}
-							gutterBottom
-						>
-							{`Result: ${currentGame.get('result')}`}
-						</Typography>
-						<Typography
-							variant="h3"
-							component="h3"
-							className={classes.subtitle}
-							gutterBottom
-						>
-							{`Date: ${moment(currentGame.get('date')).format(
-								'MM/DD/YYYY'
-							)}`}
-						</Typography>
-						<Typography
-							variant="h3"
-							component="h3"
-							className={classes.subtitle}
-							gutterBottom
-						>
-							Moves
-						</Typography>
-						<Typography
-							variant="body2"
-							component="p"
-							className={classes.content}
-						>
-							{currentGame.get('moves')?.join(', ')}
-						</Typography>
-					</CardContent>
-				)}
-			</Card>
-
-			<Wrapper className="game-board">chess board</Wrapper>
+			{!gameLoaded ? null : (
+				<>
+					<Details
+						isReset={gameReseted}
+						isLoading={isLoading}
+						game={selectedGame}
+					/>
+					<Chess
+						isReset={gameReseted}
+						isLoading={isLoading}
+						game={selectedGame}
+						onDefaultReset={onDefaultReset}
+					/>
+				</>
+			)}
 		</Wrapper>
 	);
 };
@@ -125,12 +72,6 @@ ChessPlayground.propTypes = {
 			pathname: PropTypes.string,
 		}),
 	}),
-	classes: PropTypes.shape({
-		root: PropTypes.string,
-		title: PropTypes.string,
-		subtitle: PropTypes.string,
-		content: PropTypes.string,
-	}),
 };
 ChessPlayground.defaultPros = {
 	history: {
@@ -138,12 +79,6 @@ ChessPlayground.defaultPros = {
 			pathname: '',
 		},
 	},
-	classes: {
-		root: '',
-		title: '',
-		subtitle: '',
-		content: '',
-	},
 };
 
-export default withStyles(styles)(ChessPlayground);
+export default ChessPlayground;
