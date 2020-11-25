@@ -41,6 +41,23 @@ const styles = {
 };
 
 const Details = ({ isLoading, game, classes }) => {
+	const moves = game?.get('moves')?.toArray();
+	let id = 0;
+	let pairs = [];
+	let transformMoves = [];
+
+	if (moves) {
+		moves.forEach((item, index, array) => {
+			index === 0 ? (id += 1) : (id += 2);
+			pairs = array.splice(0, 2);
+
+			transformMoves.push({
+				id: id,
+				pairs: pairs,
+			});
+		});
+	}
+
 	return (
 		<Card className={classes.root}>
 			{isLoading ? (
@@ -88,7 +105,9 @@ const Details = ({ isLoading, game, classes }) => {
 						component="p"
 						className={classes.content}
 					>
-						{game.get('moves')?.join(', ')}
+						{transformMoves.map((move) => {
+							return `${move.id}. ${move.pairs.join(' - ')}; `;
+						})}
 					</Typography>
 				</CardContent>
 			)}

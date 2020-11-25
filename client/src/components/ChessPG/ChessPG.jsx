@@ -27,11 +27,15 @@ const ChessPlayground = ({ history }) => {
 		setGameReseted(false);
 	}, [setGameReseted]);
 
+	const getGame_ID = (payload) => {
+		return parseInt(getRouteParam(payload));
+	};
+
 	useEffect(() => {
 		if (id === '/') {
 			setGameLoaded(false);
 		} else {
-			setGame_ID(parseInt(getRouteParam(id)));
+			setGame_ID(getGame_ID(id));
 			setGameLoaded(true);
 		}
 		response?.forEach((game, index) =>
@@ -40,7 +44,7 @@ const ChessPlayground = ({ history }) => {
 	}, [id, response, game_ID]);
 
 	useEffect(() => {
-		if (id !== game_ID && !isNaN(parseInt(getRouteParam(id)))) {
+		if (id !== game_ID && !isNaN(getGame_ID(id))) {
 			setGameReseted(true);
 		}
 	}, [id]);

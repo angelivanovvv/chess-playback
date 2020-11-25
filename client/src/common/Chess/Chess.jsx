@@ -48,7 +48,7 @@ const Chess = ({ isLoading, isReset, game, onDefaultReset, classes }) => {
 
 		timer = setInterval(() => {
 			setPosition((prevState) => prevState + 1);
-		}, 10);
+		}, 1000);
 	}, [timer]);
 
 	const onStopGame = useCallback(() => {
@@ -65,6 +65,7 @@ const Chess = ({ isLoading, isReset, game, onDefaultReset, classes }) => {
 
 	const onResetGame = useCallback(() => {
 		setIsStarted(false);
+		setIsDisabled(false);
 		setPosition(0);
 		clearInterval(timer);
 	}, []);
